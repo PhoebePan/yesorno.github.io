@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>可不可以不上班</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!-- style -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /**
+         * BxSlider v4.1.2 - Fully loaded, responsive content slider
+         * http://bxslider.com
+         *
+         * Written by: Steven Wanderski, 2014
+         * http://stevenwanderski.com
+         * (while drinking Belgian ales and listening to jazz)
+         *
+         * CEO and founder of bxCreative, LTD
+         * http://bxcreative.com
+         */
+
+        /** RESET AND LAYOUT
+        ===================================*/
+
+        .bx-wrapper {
+            position: relative;
+            margin: 0 auto 45px;
+            padding: 0;
+            *zoom: 1;
+        }
+
+        .bx-wrapper img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /** THEME
+        ===================================*/
+
+        .bx-wrapper .bx-viewport {
+            /*-moz-box-shadow: 0 0 5px #ccc;
+            -webkit-box-shadow: 0 0 5px #ccc;
+            box-shadow: 0 0 5px #ccc;
+            border:  5px solid #fff;*/
+            left: -5px;
+            /*background: #fff;*/
+
+            /*fix other elements on the page moving (on Chrome)*/
+            -webkit-transform: translatez(0);
+            -moz-transform: translatez(0);
+                -ms-transform: translatez(0);
+                -o-transform: translatez(0);
+                transform: translatez(0);
+        }
+
+        .bx-wrapper .bx-pager,
+        .bx-wrapper .bx-controls-auto {
+            position: absolute;
+            bottom: -30px;
+            width: 100%;
+        }
+
+        /* LOADER */
+
+        .bx-wrapper .bx-loading {
+            min-height: 50px;
+            background: url(images/bx_loader.gif) center center no-repeat #fff;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2000;
+        }
+
+        /* PAGER */
+
+        .bx-wrapper .bx-pager {
+            text-align: center;
+            font-size: .85em;
+            font-family: Arial;
+            font-weight: bold;
+            color: #666;
+            padding-top: 20px;
+        }
+
+        .bx-wrapper .bx-pager .bx-pager-item,
+        .bx-wrapper .bx-controls-auto .bx-controls-auto-item {
+            display: inline-block;
+            *zoom: 1;
+            *display: inline;
+        }
+
+        .bx-wrapper .bx-pager.bx-default-pager a {
+            background: #666;
+            text-indent: -9999px;
+            display: block;
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            outline: 0;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+        }
+
+        .bx-wrapper .bx-pager.bx-default-pager a:hover,
+        .bx-wrapper .bx-pager.bx-default-pager a.active {
+            background: #000;
+        }
+
+        /* DIRECTION CONTROLS (NEXT / PREV) */
+
+        /*.bx-wrapper .bx-prev {
+            left: 10px;
+            background: url(../images/controls.png) no-repeat 0 -32px;
+        }
+
+        .bx-wrapper .bx-next {
+            right: 10px;
+            background: url(../images/controls.png) no-repeat -43px -32px;
+        }*/
+
+        /*.bx-wrapper .bx-prev:hover {
+            background-position: 0 0;
+        }
+
+        .bx-wrapper .bx-next:hover {
+            background-position: -43px 0;
+        }*/
+
+        .bx-wrapper .bx-controls-direction a {
+            position: absolute;
+            top: 50%;
+            margin-top: -16px;
+            outline: 0;
+            width: 32px;
+            height: 32px;
+            text-indent: -9999px;
+            z-index: 9999;
+        }
+
+        .bx-wrapper .bx-controls-direction a.disabled {
+            display: none;
+        }
+
+        /* AUTO CONTROLS (START / STOP) */
+
+        .bx-wrapper .bx-controls-auto {
+            text-align: center;
+        }
+
+        .bx-wrapper .bx-controls-auto .bx-start {
+            display: block;
+            text-indent: -9999px;
+            width: 10px;
+            height: 11px;
+            outline: 0;
+            background: url(images/controls.png) -86px -11px no-repeat;
+            margin: 0 3px;
+        }
+
+        .bx-wrapper .bx-controls-auto .bx-start:hover,
+        .bx-wrapper .bx-controls-auto .bx-start.active {
+            background-position: -86px 0;
+        }
+
+        .bx-wrapper .bx-controls-auto .bx-stop {
+            display: block;
+            text-indent: -9999px;
+            width: 9px;
+            height: 11px;
+            outline: 0;
+            background: url(images/controls.png) -86px -44px no-repeat;
+            margin: 0 3px;
+        }
+
+        .bx-wrapper .bx-controls-auto .bx-stop:hover,
+        .bx-wrapper .bx-controls-auto .bx-stop.active {
+            background-position: -86px -33px;
+        }
+
+        /* PAGER WITH AUTO-CONTROLS HYBRID LAYOUT */
+
+        .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager {
+            text-align: left;
+            width: 80%;
+        }
+
+        .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-controls-auto {
+            right: 0;
+            width: 35px;
+        }
+
+        /* IMAGE CAPTIONS */
+
+        .bx-wrapper .bx-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background: #666\9;
+            background: rgba(80, 80, 80, 0.75);
+            width: 100%;
+        }
+
+        .bx-wrapper .bx-caption span {
+            color: #fff;
+            font-family: Arial;
+            display: block;
+            font-size: .85em;
+            padding: 10px;
+        }
+        .navbar-logo img {height: 40px;}.pull-left {float: left;}.pull-right {float: right;}.text-right {text-align:right;}.static-menu > a > img {padding-top:10px;padding-left:15px;}
+
+        /* top */
+        .top_bg {
+            background: url(images/top_bg.jpg) no-repeat center center;
+        }
+
+        .choose-wrap {
+            background: url(images/choose_top_gray.png) no-repeat center 44px;
+        }
+
+        .choose-top1 {
+            background: url(images/choose_top_01.png) no-repeat left center;
+        }
+
+        .choose-top2 {
+            background: url(images/choose_top_02.png) no-repeat right center;
+        }
+
+        .choose-top1:hover {
+            background: url(images/choose_top_yes.png) no-repeat left center;
+        }
+
+        .choose-top2:hover {
+            background: url(images/choose_top_no.png) no-repeat right center;
+        }
+
+        .choose-fb-share {
+            background: url(images/fb.png) no-repeat right center;
+        }
+
+        .top-logo-wrap {
+            /*background: red;*/
+        }
+
+        .top-friday-logo {
+            background: url(images/logo_stpage.png) no-repeat right center;
+        }
+
+        /* yes */
+        .yes_bg_01 {
+            background: url(images/yes_bg_01.jpg) no-repeat center center;
+        }
+
+        .yes_bg_02 {
+            background: url(images/yes_bg_02.jpg) no-repeat center center;
+        }
+
+        .yes_topic_02 {
+            background: url(images/yes_topic02.png) no-repeat center center;
+        }
+
+        .yes_bg_03 {
+            background: url(images/yes_bg_03.jpg) no-repeat center center;
+        }
+
+        .circle-bg {
+            background: url(images/bg.png) no-repeat center center;
+        }
+
+        .circle01 .circle-icon {
+            background: url(images/yes_circle168x168_01.png) no-repeat center center;
+        }
+
+        .circle02 .circle-icon {
+            background: url(images/yes_circle168x168_02.png) no-repeat center center;
+        }
+
+        .circle03 .circle-icon {
+            background: url(images/yes_circle168x168_03.png) no-repeat center center;
+        }
+
+        .circle04 .circle-icon {
+            background: url(images/yes_circle168x168_04.png) no-repeat center center;
+        }
+
+        /* yes-menu */
+        .yes-menu1 {
+            background: url(images/yes_tab_01.png);
+        }
+
+        .yes-menu2 {
+            background: url(images/yes_tab_02.png);
+        }
+
+        .yes-menu3 {
+            background: url(images/yes_tab_03.png);
+        }
+
+        .yes-menu4 {
+            background: url(images/yes_tab_04.png);
+        }
+
+        .yes-menu1:hover,  .yes-menu1.tab-active{
+            background: url(images/yes_tab_01_1.png);
+        }
+
+        .yes-menu2:hover, .yes-menu2.tab-active {
+            background: url(images/yes_tab_02_1.png);
+        }
+
+        .yes-menu3:hover, .yes-menu3.tab-active {
+            background: url(images/yes_tab_03_1.png);
+        }
+
+        .yes-menu4:hover, .yes-menu4.tab-active {
+            background: url(images/yes_tab_04_1.png);
+        }
+
+        /* no */
+        .no-menu1 {
+            background: url(images/no_tab_01.png);
+        }
+
+        .no-menu2 {
+            background: url(images/no_tab_02.png);
+        }
+
+        .no-menu3 {
+            background: url(images/no_tab_03.png);
+        }
+
+        .no-menu4 {
+            background: url(images/no_tab_04.png);
+        }
+
+        .no-menu1:hover,  .no-menu1.tab-active{
+            background: url(images/no_tab_01_1.png);
+        }
+
+        .no-menu2:hover, .no-menu2.tab-active {
+            background: url(images/no_tab_02_1.png);
+        }
+
+        .no-menu3:hover, .no-menu3.tab-active {
+            background: url(images/no_tab_03_1.png);
+        }
+
+        .no-menu4:hover, .no-menu4.tab-active {
+            background: url(images/no_tab_04_1.png);
+        }
+
+        .no_bg_01 {
+            background: url(images/no_bg_01.jpg) no-repeat center center;
+        }
+
+        .no_bg_02 {
+            background: url(images/no_bg_02.jpg) no-repeat center center;
+        }
+
+        .no_topic_02 {
+            background: url(images/no_topic02.png) no-repeat center center;
+        }
+
+        .no_bg_03 {
+            background: url(images/no_bg_03.jpg) no-repeat center center;
+        }
+
+        .no-white-bg {
+            background: url(images/bg1.png) no-repeat center center;
+        }
+
+        .alien {
+            background: url(images/office/alien.png) no-repeat center center;
+        }
+
+        .letter {
+            background: url(images/office/letter.png) no-repeat center center;
+        }
+
+        .phone {
+            background: url(images/office/phone.png) no-repeat center center;
+        }
+
+        .notebook {
+            background: url(images/office/notebook.png) no-repeat center center;
+        }
+
+        .note {
+            background: url(images/office/note.png) no-repeat center center;
+        }
+
+        .fish {
+            background: url(images/office/fish.png) no-repeat center center;
+        }
+
+        .coffee {
+            background: url(images/office/coffee.png) no-repeat center center;
+        }
+
+        .car {
+            background: url(images/office/car.png) no-repeat center center;
+        }
+
+        .glasses {
+            background: url(images/office/Glasses.png) no-repeat center center;
+        }
+
+        .apple {
+            background: url(images/office/apple.png) no-repeat center center;
+        }
+
+        .prduct-wrap .link-open-box:hover {
+            background: url(images/goods_02.jpg) no-repeat center center;
+        }
+
+        /* bxslider */
+        .bx-pager a {
+            width: 95px;
+            height: 95px;
+            margin-bottom: 27px;
+            top: 66px;
+            position: relative;
+            display: block;
+        }
+
+        .bx-pager a img {
+            position: relative;
+            opacity: 0.6;
+        }
+
+        .bx-pager a.active {
+        }
+
+        .bx-pager a:hover img,
+        .bx-pager a.active img {
+            opacity: 1;
+        }
+        .container .bx-wrapper .bx-prev {
+            position: absolute;
+            top: 46%;
+            margin-top: -16px;
+            outline: 0;
+            width: 43px;
+            height: 42px;
+            text-indent: -9999px;
+            z-index: 9999;
+            left: 0px;
+        }
+
+        .container .bx-wrapper .bx-next {
+            position: absolute;
+            top: 56%;
+            margin-top: -16px;
+            outline: 0;
+            width: 43px;
+            height: 42px;
+            text-indent: -9999px;
+            z-index: 9999;
+            right: 0px;
+
+        }
+
+        #sliderWrap1 .bx-prev {
+            left: 302px;
+        }
+
+        #sliderWrap1 .bx-next {
+            right: 5px;
+        }
+
+        #sliderWrap2 .bx-prev {
+            left: -35px;
+        }
+
+        #sliderWrap2 .bx-next {
+            left: -35px;
+        }
+
+        .container {
+            width: 600px;
+            height: 580px;
+            margin: 0 auto;
+            background: url(images/clothes_bg.png);
+            position: relative;
+            top: 48px;
+        }
+
+        .container #sliderWrap2 {
+            width: 216px;
+            left: 55px;
+            position: absolute;
+        }
+
+        .container #sliderWrap1 {
+            width: 350px;
+            left: 237px;
+            position: absolute;
+        }
+
+        .sliderWrap {
+            height: 580px;
+            display: inline-block;
+        }
+        .bx-wrapper {
+            height: 580px;
+        }
+        .bx-viewport {
+            width: 350px !important;
+            overflow: visible !important;
+            z-index: 51;
+        }
+
+        #slider2 {
+            left: 19px;
+            top: -17px;
+        }
+
+        #customPager1 {
+            position: absolute;
+            right: -133px;
+            top: -67px;
+        }
+
+        #customPager2 {
+            left: -177px;
+            position: absolute;
+            top: -67px;
+        }
+
+        .bx-wrapper .bx-prev {
+            left: 10px;
+            background: url(images/Clothes_up.png);
+        }
+
+        .bx-wrapper .bx-next {
+            right: 10px;
+            background: url(images/Clothes_down.png);
+        }
+
+        #sliderWrap1 {
+            z-index: 1;
+        }
+
+        #sliderWrap2 {
+            z-index: 2;
+        }
+
+        #slider1 li {
+            width: 350px !important;
+            height: 580px !important;
+        }
+
+        #slider2 li {
+            width: 220px !important;
+        }
+
+        /* plus */
+        .plus {
+            background: url(images/plus_b.png);
+        }
+
+        .plus.shoes {
+            width: 33px;
+            height: 33px;
+            position: absolute;
+            top: 100px;
+            left: 40px;
+            -moz-transform: matrix(1, 0, 0, 1, 100, 87);
+            -ms-transform: matrix(1, 0, 0, 1, 100, 87);
+            -o-transform: matrix(1, 0, 0, 1, 100, 87);
+            -webkit-transform: matrix(1, 0, 0, 1, 100, 87);
+            transform: matrix(1, 0, 0, 1, 100, 87);
+            -moz-transform-origin: 0% 0%;
+            -ms-transform-origin: 0% 0%;
+            -o-transform-origin: 0% 0%;
+            -webkit-transform-origin: 0% 0%;
+            transform-origin: 0% 0%;
+        }
+
+        .plus.clothes {
+            width: 33px;
+            height: 33px;
+            position: absolute;
+            top: 100px;
+            left: 40px;
+            -moz-transform: matrix(1, 0, 0, 1, 154, 37);
+            -ms-transform: matrix(1, 0, 0, 1, 154, 37);
+            -o-transform: matrix(1, 0, 0, 1, 154, 37);
+            -webkit-transform: matrix(1, 0, 0, 1, 154, 37);
+            transform: matrix(1, 0, 0, 1, 154, 37);
+            -moz-transform-origin: 0% 0%;
+            -ms-transform-origin: 0% 0%;
+            -o-transform-origin: 0% 0%;
+            -webkit-transform-origin: 0% 0%;
+            transform-origin: 0% 0%;
+        }
+
+        .plus.down {
+            width: 33px;
+            height: 33px;
+            position: absolute;
+            top: 100px;
+            left: 40px;
+            -moz-transform: matrix(1, 0, 0, 1, 179, 277);
+            -ms-transform: matrix(1, 0, 0, 1, 179, 277);
+            -o-transform: matrix(1, 0, 0, 1, 179, 277);
+            -webkit-transform: matrix(1, 0, 0, 1, 179, 277);
+            transform: matrix(1, 0, 0, 1, 179, 277);
+            -moz-transform-origin: 0% 0%;
+            -ms-transform-origin: 0% 0%;
+            -o-transform-origin: 0% 0%;
+            -webkit-transform-origin: 0% 0%;
+            transform-origin: 0% 0%;
+        }
+
+        .plus:hover {
+            background: url(images/plus_w.png);
+        }
+
+        .active .desk-item .plus {
+            width: 33px;
+            height: 33px;
+            top: 100px;
+            left: 40px;
+            -moz-transform: matrix(1, 0, 0, 1, -51, -58);
+            -ms-transform: matrix(1, 0, 0, 1, -51, -58);
+            -o-transform: matrix(1, 0, 0, 1, -51, -58);
+            -webkit-transform: matrix(1, 0, 0, 1, -51, -58);
+            transform: matrix(1, 0, 0, 1, -51, -58);
+        }
+
+        .active .desk-item .plus:hover {
+        }
+
+        .prduct-wrap .plus {
+            width: 33px;
+            height: 33px;
+            top: 100px;
+            left: 40px;
+        }
+
+        .prduct-wrap .plus:hover {
+        }
+
+        /* frame */
+        .frame, .frame2 {
+            display: none;
+        }
+
+        .is_open .frame, .is_open .frame2{
+            background: url(images/frame.png);
+            text-align: center;
+            font-size: 16px;
+            font-family: '微軟正黑體', sans-serif;
+            line-height: 24px;
+            text-decoration: none;
+            width: 208px;
+            height: 122px;
+            position: relative;
+            color: black;
+            padding-top: 10px;
+            top: -129px;
+            left: 0px;
+            display: block;
+        }
+
+        .is_open .frame2{
+            background: url(images/frame2.png);
+            left: -170px;
+        }
+
+        .is_open .frame .sp_prz, .is_open .frame2 .sp_prz {
+            color: red;
+            font-size: 18px;
+        }
+
+        .is_open .frame .o_prz, .is_open .frame2 .o_prz {
+            text-decoration: line-through;
+        }
+    </style>
+
+    <!-- script -->
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+</head>
+<body>
+    <div id="fb-root"></div>
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.3&appId=127323037501";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <div class="all-body">
+        <div class="top-container">
+            <div class="top_bg">
+                <div class="top-cover-wrap">
+                    <div class="top-cover1"></div>
+                    <div class="top-cover2"></div>
+                </div>
+                <div class="choose-wrap">
+                    <div class="choose-top1 choose-top" id="yes"></div>
+                    <div class="choose-top2 choose-top" id="no"></div>
+                    <a class="choose-fb" href="http://shopping.friday.tw/lifestyle/edm/2015/07/01/GetSomeChopsticks" target="_blank">
+                        <div class="choose-fb-share"></div>
+                    </a>
+                    <div class="top-description">
+                        每個人心中都有一個必須工作的理由<br>
+                        在解開成就的那一天來臨之前<br>
+                        我們都在困頓中掙扎，在摸索跟學習中<br>
+                        看見真正的自己
+                    </div>
+                </div>
+                <div class="top-logo-wrap">
+                    <div class="top-friday-logo"></div>
+                    <div class="top-fb-like">
+                        <div class="fb-like" data-href="http://shopping.friday.tw/lifestyle/edm/2015/06/29/worksmart_playhard" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yes-container">
+            <div class="yes-wrap">
+                <div class="yes_bg_01">
+                    <div class="video-wrap">
+                        <div class="yes-video">
+                            <iframe width="305" height="185" src="https://www.youtube.com/embed/LjPh9cESj5Q" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="prduct-wrap">
+                        <div class="product-content">
+                            <ul>
+                                <li>
+                                    <a href="http://shopping.friday.tw/salecenter/index?saleNo=S00407436" target="_blank">
+                                        <div class="plus trip0">
+                                            <div class="frame">X-fighter 捍衛戰士
+                                                <br>20吋行李箱
+                                                <br><span class="o_prz">原價 4480</span> <span class="sp_prz">2680</span>
+                                                <br>好搭指數★★★</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://shopping.friday.tw/salecenter/index?saleNo=S00921889" target="_blank">
+                                        <div class="plus trip1">
+                                            <div class="frame2">日本阿愣USB2.0
+                                                <br>4埠HUB集線器
+                                                <br><span class="o_prz">原價 880</span> <span class="sp_prz">660</span>
+                                                <br>好搭指數★★★★</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://shopping.friday.tw/salecenter/index?saleNo=S00459385" target="_blank">
+                                        <div class="plus trip2">
+                                            <div class="frame">Panasonic
+                                                <br>輕巧型吹風機
+                                                <br><span class="o_prz">原價 699</span><span class="sp_prz">特價450</span>
+                                                <br>好搭指數★★★★</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://shopping.friday.tw/salecenter/index?saleNo=S00029105" target="_blank">
+                                        <div class="plus trip3">
+                                            <div class="frame">匠子工坊
+                                                <br>太陽眼鏡 (3款可選)
+                                                <br><span class="o_prz">原價490</span><span class="sp_prz">特價199</span>
+                                                <br>好搭指數★★★★</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://shopping.friday.tw/salecenter/index?saleNo=S01079722&productCategoryId=28189" target="_blank">
+                                        <div class="plus trip4">
+                                            <div class="frame">LIEVO
+                                                <br>真皮兩用隨身包
+                                                <br><span class="o_prz">原價 3980</span> <span class="sp_prz">特價3980</span>
+                                                <br>好搭指數★★★★</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href=" http://shopping.friday.tw/midindex/index?midId=30466" target="_blank">
+                                        <div class="plus trip5">
+                                            <div class="frame">LOMOGRAPHY
+                                                <br>相機
+                                                <br><span class="o_prz"></span> <span class="sp_prz">特價2690up</span>
+                                                <br>好搭指數★★★★</div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="circle-wrap">
+                        <a class="btn-yes-circle circle01" href="http://www.managertoday.com.tw/articles/view/38862" target="_blank">
+                            <div class="circle">
+                                <div class="circle-bg"></div>
+                                <div class="circle-icon"></div>
+                            </div>
+                        </a>
+                        <a class="btn-yes-circle circle02" href="http://shopping.friday.tw/lifestyle/edm/2015/05/31/picnic+1" target="_blank">
+                            <div class="circle">
+                                <div class="circle-bg"></div>
+                                <div class="circle-icon"></div>
+                            </div>
+                        </a>
+                        <a class="btn-yes-circle circle03" href="http://shopping.friday.tw/activity/index/?no=PP15060035_musicfestival" target="_blank">
+                            <div class="circle">
+                                <div class="circle-bg"></div>
+                                <div class="circle-icon"></div>
+                            </div>
+                        </a>
+                        <a class="btn-yes-circle circle04" href="http://smarturl.it/mcqyn9" target="_blank" style="margin: 0px;">
+                            <div class="circle">
+                                <div class="circle-bg"></div>
+                                <div class="circle-icon"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="yes_bg_02">
+                    <div class="yes-cover"></div>
+                </div>
+                <div class="yes_topic_02"></div>
+                <div class="yes_bg_03">
+                    <div class="container">
+                        <div class="sliderWrap" id="sliderWrap2">
+                            <ul id="slider2" class="bxslider">
+                                <li><img src="images/clothes/shoes_L1.png" />
+                                    <a href="http://shopping.friday.tw/salecenter/index?saleNo=S02436219&productCategoryId=337" target="_blank">
+                                        <div class="plus shoes">
+                                            <div class="frame">Gracegift
+                                                <br>米奇織標條紋麻底休閒鞋
+                                                <br><span class="o_prz">原價 3680</span> <span class="sp_prz">特價1680</span>
+                                                <br>好搭指數★★★★</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li><img src="images/clothes/shoes_L2.png" />
+                                    <a href="http://shopping.friday.tw/salecenter/index?saleNo=S02800892&productCategoryId=3377" target="_blank">
+                                        <div class="plus shoes">
+                                            <div class="frame">Gracegift
+                                                <br>米妮厚底休閒涼鞋
+                                                <br><span class="o_prz">原價 2580</span> <span class="sp_prz">特價1580</span>
+                                                <br>好搭指數★★★★★</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li><img src="images/clothes/shoes_L3.png" />
+                                    <a href="http://shopping.friday.tw/salecenter/index?saleNo=S02544627&productCategoryId=337" target="_blank">
+                                        <div class="plus shoes">
+                                            <div class="frame">Gracegift
+                                                <br>米妮飾釦一字厚底涼鞋
+                                                <br><span class="o_prz">原價 3680</span> <span class="sp_prz">特價1680</span>
+                                                <br>好搭指數★★★★</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li><img src="images/clothes/shoes_L4.png" />
+                                    <a href="http://shopping.friday.tw/salecenter/index?saleNo=S02800908&productCategoryId=337" target="_blank">
+                                        <div class="plus shoes">
+                                            <div class="frame">Gracegift
+                                                <br>米奇家族厚底海灘拖鞋
+                                                <br><span class="o_prz">原價 1780</span> <span class="sp_prz">特價780</span>
+                                                <br>好搭指數★★★</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li><img src="images/clothes/shoes_L5.png" />
+                                    <a href="http://shopping.friday.tw/salecenter/index?saleNo=S02544651&productCategoryId=337" target="_blank">
+                                        <div class="plus shoes">
+                                            <div class="frame">Gracegift
+                                                <br>米妮寬帶繫踝楔型涼鞋
+                                                <br><span class="o_prz">原價 3680</span> <span class="sp_prz">特價1680</span>
+                                                <br>好搭指數★★★★</div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div id="customPager2" class="bx-pager">
+                                <a data-slide-index="0" href=""><img src="images/clothes/shoes_s1.png" /></a>
+                                <a data-slide-index="1" href=""><img src="images/clothes/shoes_s2.png" /></a>
+                                <a data-slide-index="2" href=""><img src="images/clothes/shoes_s3.png" /></a>
+                                <a data-slide-index="3" href=""><img src="images/clothes/shoes_s4.png" /></a>
+                                <a data-slide-index="4" href=""><img src="images/clothes/shoes_s5.png" /></a>
+                            </div>
+                        </div>
+                        <div class="sliderWrap" id="sliderWrap1">
+                            <ul id="slider1" class="bxslider">
+                                <li><img src="images/clothes/clothes_L1.png" />
+                                    <a href="http://shopping.friday.tw/salecenter/index?saleNo=S02920404&productCategoryId=36709" target="_blank">
+                                        <div class="plus clothes">
+                                            <div class="frame">Life8
+                                                <br>個性刷色無袖丹寧襯衫
+                                                <br><span class="o_prz">原價790</span> <span class="sp_prz">特價620</span>
+                                                <br>好搭指數★★★★</div>
+                                        </div>
+                                    </a>
+                                    <a href="http://shopping.friday.tw/salecenter/index?saleNo=S02984788&productCategoryId=15354" target="_blank">
+                                        <div class="plus down">
+                                            <div class="frame2">RUBON
+                                                <br>一字領雪紡褲裝
+                                                <br><span class="o_prz">原價 1280</span> <span class="sp_prz">特價690</span>
+                                                <br>好搭指數★★★</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li><img src="images/clothes/clothes_L2.png" />
+                                    <a href="http://shopping.friday.tw/salecenter/index?saleNo=S02542907" target="_blank">
+                                        <div class="plus clothes">
+                                            <div class="frame">Life8
+                                                <br>V領網眼透視上衣
+                                                <br><span class="o_prz">原價 690</span> <span class="sp_prz">特價520</span>
+                                                <br>好搭指數★★★</div>
+                                        </div>
+                                    </a>
+                                    <a href="http://shopping.friday.tw/salecenter/index?saleNo=S01982421" target="_blank">
+                                        <div class="plus down">
+                                            <div class="frame2">RUBON
+                                                <br>一字領連身牛仔褲裝
+                                                <br><span class="o_prz">原價 880</span> <span class="sp_prz">特價218</span>
+                                                <br>好搭指數★★★</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li><img src="images/clothes/clothes_L3.png" />
+                                    <a href="http://shopping.friday.tw/salecenter/index?saleNo=S02543147&productCategoryId=36709" target="_blank">
+                                        <div class="plus clothes">
+                                            <div class="frame">Life8
+                                                <br>不規則無袖長上衣
+                                                <br><span class="o_prz">原價 399</span> <span class="sp_prz">特價229</span>
+                                                <br>好搭指數★★★★</div>
+                                        </div>
+                                    </a>
+                                    <a href="http://shopping.friday.tw/salecenter/index?saleNo=S01897397" target="_blank">
+                                        <div class="plus down">
+                                            <div class="frame2">RUBON
+                                                <br>鬆緊包臀彈力牛仔裙
+                                                <br><span class="o_prz">原價980</span> <span class="sp_prz">特價590</span>
+                                                <br>好搭指數★★★★</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li><img src="images/clothes/clothes_L4.png" />
+                                    <a href="http://shopping.friday.tw/salecenter/index?saleNo=S02920404&productCategoryId=36709" target="_blank">
+                                        <div class="plus clothes">
+                                            <div class="frame">Life8
+                                                <br>個性刷色無袖丹寧襯衫
+                                                <br><span class="o_prz">原價 790</span> <span class="sp_prz">特價620</span>
+                                                <br>好搭指數★★★★</div>
+                                        </div>
+                                    </a>
+                                    <a href="http://shopping.friday.tw/salecenter/index?saleNo=S02297629&productCategoryId=12322" target="_blank">
+                                        <div class="plus down">
+                                            <div class="frame2">小野千尋
+                                                <br>波西米亞碎花雪紡洋裝
+                                                <br><span class="o_prz">原價598</span> <span class="sp_prz">特價299</span>
+                                                <br>好搭指數★★★</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li><img src="images/clothes/clothes_L5.png" />
+                                    <a href="http://shopping.friday.tw/salecenter/index?saleNo=S02543147&productCategoryId=36709" target="_blank">
+                                        <div class="plus clothes">
+                                            <div class="frame">Life8
+                                                <br>不規則無袖長上衣
+                                                <br><span class="o_prz">原價 399</span> <span class="sp_prz">特價229</span>
+                                                <br>好搭指數★★★★</div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div id="customPager1" class="bx-pager">
+                                <a data-slide-index="0" href=""><img src="images/clothes/clothes_s1.png" /></a>
+                                <a data-slide-index="1" href=""><img src="images/clothes/clothes_s2.png" /></a>
+                                <a data-slide-index="2" href=""><img src="images/clothes/clothes_s3.png" /></a>
+                                <a data-slide-index="3" href=""><img src="images/clothes/clothes_s4.png" /></a>
+                                <a data-slide-index="4" href=""><img src="images/clothes/clothes_s5.png" /></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="yes-menu">
+                <div class="yes-menu1 menu btn-index" id="yes-menu1"></div>
+                <div class="yes-menu2 menu" id="yes-menu2"></div>
+                <div class="yes-menu3 menu" id="yes-menu3"></div>
+                <div class="yes-menu4 menu btn-yes-or-no" id="yes-menu4"></div>
+            </div>
+        </div>
+        <div class="no-container">
+            <div class="no-wrap">
+                <div class="no_bg_01">
+                    <div class="video-wrap">
+                        <div class="no-video">
+                            <iframe width="423" height="253" src="https://www.youtube.com/embed/pkAxA6F70AM" frameborder="0" allowfullscreen></iframe>                        </div>
+                        <div class="no-video2">
+                            <iframe width="423" height="253" src="https://www.youtube.com/embed/gue_93OVYhg" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="prduct-wrap">
+                        <div class="product-content">
+                            <ul>
+                                <li>
+                                    <a href="http://shopping.friday.tw/salecenter/index?saleNo=S00647561" target="_blank">
+                                        <div class="plus mischief1">
+                                            <div class="frame">Hamee 日本製
+                                                <br>造型手機架-剝皮橘子
+                                                <br><span class="o_prz">原價 1380</span> <span class="sp_prz">特價1280</span>
+                                                <br>搗蛋指數★★</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://shopping.friday.tw/lifestyle/goods/S03407076" target="_blank">
+                                        <div class="plus mischief2">
+                                            <div class="frame">DREAM CHEEKY
+                                                <br>USB雷霆導彈發射器
+                                                <br><span class="o_prz">原價 2980</span> <span class="sp_prz">特價1980</span>
+                                                <br>搗蛋指數★★★★★</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://shopping.friday.tw/salecenter/index?saleNo=S01551525" target="_blank">
+                                        <div class="plus mischief3">
+                                            <div class="frame">WAGAii
+                                                <br>來福筷環保餐具組
+                                                <br><span class="o_prz">原價 590</span> <span class="sp_prz">特價490</span>
+                                                <br>搗蛋指數★★★</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://shopping.friday.tw/salecenter/index?saleNo=S00174550" target="_blank">
+                                        <div class="plus mischief4">
+                                            <div class="frame">IMB
+                                                <br>K歌大師無線麥克風
+                                                <br><span class="o_prz">原價 3680</span> <span class="sp_prz">特價2980</span>
+                                                <br>搗蛋指數★★★★★</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://shopping.friday.tw/salecenter/index?saleNo=S02572835" target="_blank">
+                                        <div class="plus mischief5">
+                                            <div class="frame">ADATA 威剛
+                                                <br>藍芽調光調色燈泡
+                                                <br><span class="o_prz">原價 2280</span> <span class="sp_prz">特價1590</span>
+                                                <br>搗蛋指數★★★★★</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.youtube.com/watch?v=wml9A-Ifcsw" target="_blank">
+                                        <div class="link-open-box"></div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="no_bg_02">
+                    <div class="no-cover"></div>
+                </div>
+                <div class="no_topic_02"></div>
+                <div class="no_bg_03">
+                    <div class="desk-wrap">
+                        <div class="no-white-bg">
+                            <div class="desk-item alien">
+                                <a href="http://shopping.friday.tw/salecenter/index?saleNo=S02128829" target="_blank">
+                                    <div class="plus">
+                                        <div class="frame">Flightline
+                                            <br>外星人家族-桌面花盆
+                                            <br><span class="o_prz">原價1250</span> <span class="sp_prz">特價650</span>
+                                            <br>效率感★★★★★
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="desk-item letter"></div>
+                            <div class="desk-item phone">
+                                <a href="http://shopping.friday.tw/salecenter/index?saleNo=S02309971" target="_blank">
+                                    <div class="plus">
+                                        <div class="frame">Samsung
+                                            <br>Galaxy S6 Edge
+                                            <br><span class="o_prz">原價27900</span> <span class="sp_prz">特價23500</span>
+                                            <br>效率感★★★★★
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="desk-item notebook">
+                                <a href="http://shopping.friday.tw/salecenter/index?saleNo=S00651777" target="_blank">
+
+                                    <div class="plus">
+                                        <div class="frame">Acer
+                                            <br>VN7-571G-59ML i5
+                                            <br><span class="o_prz">原價44900</span> <span class="sp_prz">特價23900</span>
+                                            <br>效率感★★★★★
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="desk-item note">
+                                <ul>
+                                    <li class="note-item1">
+                                        <a href="http://shopping.friday.tw/salecenter/index?saleNo=S00021155" target="_blank">
+                                            <div class="plus">
+                                                <div class="frame" style="top: -211px; left: -15px;">美國Sundown日落恩賜
+                                                    <br>高單位精純魚油 200粒
+                                                    <br><span class="o_prz">原價1580</span> <span class="sp_prz">特價1260</span>
+                                                    <br>補血度★★★★
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="note-item2">
+                                        <a href="http://shopping.friday.tw/salecenter/index?saleNo=S02276749" target="_blank">
+                                            <div class="plus">
+                                                <div class="frame" style="top: -232px; left: -20px;">遠東生技
+                                                    <br>晶亮葉黃素軟膠囊 60顆
+                                                    <br><span class="o_prz">原價2290</span> <span class="sp_prz">特價1980</span>
+                                                    <br>補血度★★★★
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="note-item3">
+                                        <a href="http://shopping.friday.tw/salecenter/index?saleNo=S02312227" target="_blank">
+                                            <div class="plus">
+                                                <div class="frame" style="top: -218px; left: -47px;">BioJoy百喬
+                                                    <br>法國天然綜合B群x3瓶
+                                                    <br><span class="o_prz">原價2040</span> <span class="sp_prz">特價1150</span>
+                                                    <br>補血度★★★★★
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="note-item4">
+                                        <a href="http://shopping.friday.tw/search?keyword=KeepCup&productCategory=%2F" target="_blank">
+                                            <div class="plus">
+                                                <div class="frame2" style="top: -197px;left: -171px;">KeepCup
+                                                    <br>醇釀系列-隨身咖啡杯 
+                                                    <br><span class="o_prz"></span> <span class="sp_prz">特價880up</span>
+                                                    <br>實用度★★★★
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="note-item5">
+                                        <a href="http://shopping.friday.tw/salecenter/index?saleNo=S00306965" target="_blank">
+                                            <div class="plus">
+                                                <div class="frame" style="top: -183px; left: -48px;">美國OSTER
+                                                    <br>隨行杯咖啡機
+                                                    <br><span class="o_prz">原價2290</span> <span class="sp_prz">特價1980</span>
+                                                    <br>實用度★★★★★
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="desk-item fish">
+                                <a href="http://shopping.friday.tw/lifestyle/goods/S01963181" target="_blank">
+                                    <div class="plus">
+                                        <div class="frame">ARKY
+                                            <br>香草與魚Herb & Fish
+                                            <br><span class="o_prz">原價2980</span> <span class="sp_prz">特價2980</span>
+                                            <br>效率感★★★★★
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="desk-item coffee">
+                            </div>
+                            <div class="desk-item car">
+                                <a href="http://shopping.friday.tw/lifestyle/goods/S03407132" target="_blank">
+                                    <div class="plus">
+                                        <div class="frame">Click Car Mouse
+                                            <br>MINI Cooper S 滑鼠
+                                            <br><span class="o_prz">原價2380</span> <span class="sp_prz">特價1980</span>
+                                            <br>>效率感★★★
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="desk-item glasses">
+                            </div>
+                            <div class="desk-item apple">
+                            </div>
+                            <a href="http://smarturl.it/t4g0e5" target="_blank">
+                                <div class="desk-item oman">
+                                </div>
+                            </a>
+                            <a href="http://www.managertoday.com.tw/articles/view/50788" target="_blank">
+                                <div class="desk-item read-more">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="no-menu">
+                <div class="no-menu1 menu btn-index" id="no-menu1"></div>
+                <div class="no-menu2 menu" id="no-menu2"></div>
+                <div class="no-menu3 menu" id="no-menu3"></div>
+                <div class="no-menu4 menu btn-yes-or-no" id="no-menu4"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
